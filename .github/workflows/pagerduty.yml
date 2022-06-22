@@ -17,6 +17,7 @@ jobs:
           schedule-id: PPQBFP9
 
       - name: Critical Issues Schedule
+        if: always()
         id: critical-issue
         uses: mxie/pagerduty-oncall-action@main
         with:
@@ -24,6 +25,7 @@ jobs:
           schedule-id: PYJ6MPP
 
       - name: Critical Escalation Schedule
+        if: always()
         id: escalation
         uses: mxie/pagerduty-oncall-action@main
         with:
