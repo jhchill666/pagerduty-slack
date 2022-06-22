@@ -57,5 +57,13 @@ jobs:
         if: always()
         run: echo ${{ steps.devops.outputs.person }} is on call
 
-
-      # Piotr Kosinski until 8:30 AM Monday, June 27th
+      - name: Slack Message                     
+        uses: hbfernandes/slack-action@1.0
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        with:
+          method: conversations.setTopic
+          args: |
+            {
+              "channel": "on-call-incidents",
+              "topic": "Hello there Jamie!"
