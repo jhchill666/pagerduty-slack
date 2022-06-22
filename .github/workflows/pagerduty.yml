@@ -1,0 +1,38 @@
+name: Find next person on call
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 8 * * 1
+
+
+jobs:
+  run-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Developer Weekday Schedule
+        id: dev-weekday
+        uses: mxie/pagerduty-oncall-action@1.2
+        with:
+          token: ${{ secrets.PAGERDUTY_TOKEN }}
+          schedule-id: PPQBFP9
+
+      - name: Critical Issues Schedule
+        id: critical-issue
+        uses: mxie/pagerduty-oncall-action@1.2
+        with:
+          token: ${{ secrets.PAGERDUTY_TOKEN }}
+          schedule-id: PYJ6MPP
+
+      - name: Critical Escalation Schedule
+        id: escalation
+        uses: mxie/pagerduty-oncall-action@1.2
+        with:
+          token: ${{ secrets.PAGERDUTY_TOKEN }}
+          schedule-id: P2SAWCS
+
+      - run: echo ${{ steps.dev-weekday.outputs.person }} is on call
+      - run: echo ${{ steps.critical-issue.outputs.person }} is on call
+      - run: echo ${{ steps.escalation.outputs.person }} is on call
+
+
+      # Piotr Kosinski until 8:30 AM Monday, June 27th
