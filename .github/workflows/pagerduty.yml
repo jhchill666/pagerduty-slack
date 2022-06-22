@@ -57,37 +57,37 @@ jobs:
         if: always()
         run: echo ${{ steps.devops.outputs.person }} is on call
 
-      # - name: Slack Message                     
-      #   if: always()
-      #   uses: hbfernandes/slack-action@1.0
-      #   env:
-      #     SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-      #   with:
-      #     method: conversations.setTopic
-      #     args: |
-      #       {
-      #         "channel": "on-call-incidents",
-      #         "topic": "Hello there Jamie!"
-      #       }
-
       - name: Slack Message                     
         if: always()
-        uses: slackapi/slack-github-action@v1.18.0
+        uses: hbfernandes/slack-action@1.0
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         with:
-          # For posting a rich message using Block Kit
-          payload: |
+          method: conversations.setTopic
+          args: |
             {
-              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                }
-              ]
+              "channel": "on-call-incidents",
+              "topic": "Hello there Jamie!"
             }
+
+      # - name: Slack Message                     
+      #   if: always()
+      #   uses: slackapi/slack-github-action@v1.18.0
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      #   with:
+      #     # For posting a rich message using Block Kit
+      #     payload: |
+      #       {
+      #         "text": "PagerDuty Rota Nofication: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+      #         "blocks": [
+      #           {
+      #             "type": "section",
+      #             "text": {
+      #               "type": "mrkdwn",
+      #               "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+      #             }
+      #           }
+      #         ]
+      #       }
