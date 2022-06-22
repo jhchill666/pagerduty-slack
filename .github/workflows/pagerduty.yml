@@ -11,21 +11,21 @@ jobs:
     steps:
       - name: Developer Weekday Schedule
         id: dev-weekday
-        uses: mxie/pagerduty-oncall-action@v1.1
+        uses: mxie/pagerduty-oncall-action@main
         with:
           token: ${{ secrets.PAGERDUTY_TOKEN }}
           schedule-id: PPQBFP9
 
       - name: Critical Issues Schedule
         id: critical-issue
-        uses: mxie/pagerduty-oncall-action@v1.1
+        uses: mxie/pagerduty-oncall-action@main
         with:
           token: ${{ secrets.PAGERDUTY_TOKEN }}
           schedule-id: PYJ6MPP
 
       - name: Critical Escalation Schedule
         id: escalation
-        uses: mxie/pagerduty-oncall-action@v1.1
+        uses: mxie/pagerduty-oncall-action@main
         with:
           token: ${{ secrets.PAGERDUTY_TOKEN }}
           schedule-id: P2SAWCS
