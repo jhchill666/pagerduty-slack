@@ -32,9 +32,17 @@ jobs:
           token: ${{ secrets.PAGERDUTY_TOKEN }}
           schedule-id: P2SAWCS
 
-      - run: echo ${{ steps.dev-weekday.outputs.person }} is on call
-      - run: echo ${{ steps.critical-issue.outputs.person }} is on call
-      - run: echo ${{ steps.escalation.outputs.person }} is on call
+      - name: Dev Weekday
+        if: always()
+        run: echo ${{ steps.dev-weekday.outputs.person }} is on call
+
+      - name: Critical Issues
+        if: always()
+        run: echo ${{ steps.critical-issue.outputs.person }} is on call
+
+      - name: Escalation
+        if: always()
+        run: echo ${{ steps.escalation.outputs.person }} is on call
 
 
       # Piotr Kosinski until 8:30 AM Monday, June 27th
