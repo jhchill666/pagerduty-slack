@@ -58,6 +58,7 @@ jobs:
         run: echo ${{ steps.devops.outputs.person }} is on call
 
       - name: Slack Message                     
+        if: always()
         uses: hbfernandes/slack-action@1.0
         env:
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
