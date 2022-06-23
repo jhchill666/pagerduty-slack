@@ -67,7 +67,8 @@ jobs:
           args: |
             {
               "channel": "oncall-rota",
-              "topic": "Hello there Jamie!"
+              "topic": "Hello there Jamie!",
+              "token": ${{ secrets.SLACK_TOKEN }}
             }
 
       - name: Slack Message                     
