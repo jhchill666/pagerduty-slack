@@ -66,7 +66,7 @@ jobs:
           method: conversations.setTopic
           args: |
             {
-              "channel": "oncall-rota",
+              "channel": "#oncall-rota",
               "topic": "Hello there Jamie!"
             }
 
