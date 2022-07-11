@@ -13,9 +13,9 @@ jobs:
       - name: Developer Weekday Schedule
         uses: fjogeleit/http-request-action@v1
         if: always()
-        id: weekday-email
+        id: weekday-pd
         with:
-          url: https://api.pagerduty.com/oncalls?email=${{ steps.dev-weekday.outputs.person }}
+          url: https://api.pagerduty.com/oncalls
           method: 'GET'
           customHeaders: '{"Content-Type": "application/vnd.pagerduty+json;version=2", "Authorization": "Token token=${{ secrets.PAGERDUTY_TOKEN }}"}'
           contentType: application/json
