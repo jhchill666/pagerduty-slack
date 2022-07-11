@@ -21,6 +21,9 @@ jobs:
           contentType: application/json
           bearerToken: ${{ secrets.SLACK_TOKEN }}
 
+      - name: Developer Weekday Schedule Output
+        if: always()
+        run: echo ${{ fromJson(steps.weekday-pd.outputs.response).oncalls }}
 
       - name: Developer Weekday Schedule
         id: dev-weekday
