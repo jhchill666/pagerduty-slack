@@ -23,7 +23,7 @@ jobs:
 
       - name: Developer Weekday Schedule Output
         if: always()
-        run: echo ${{ steps.weekday-pd.outputs.response.oncalls }}
+        run: echo "${{ fromJson(steps.weekday-pd.outputs.response).oncalls }}"
 
       - name: Developer Weekday Schedule
         id: dev-weekday
