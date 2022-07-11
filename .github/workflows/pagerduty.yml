@@ -97,7 +97,7 @@ jobs:
 
       - name: Users email
         if: always()
-        run: echo ${{ steps.user-email.outputs.response }}
+        run: echo ${{ steps.user-email.outputs.response.user.profile.email }}
       
 
       - name: Slack Message                     
