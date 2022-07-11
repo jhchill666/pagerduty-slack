@@ -101,15 +101,15 @@ jobs:
           contentType: application/x-www-form-urlencoded
           bearerToken: ${{ secrets.SLACK_TOKEN }}
 
-      - name: Users email
+      - name: Weekday email
         if: always()
         run: echo ${{ fromJson(steps.weekday-email.outputs.response).user.profile.email }}
 
-      - name: Users email
+      - name: Critical email
         if: always()
         run: echo ${{ fromJson(steps.critical-email.outputs.response).user.profile.email }}
 
-      - name: Users email
+      - name: Escalation email
         if: always()
         run: echo ${{ fromJson(steps.escalation-email.outputs.response).user.profile.email }}
 
