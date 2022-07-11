@@ -73,6 +73,25 @@ jobs:
 
       - name: Slack Message                     
         if: always()
+        id: users
+        uses: hbfernandes/slack-action@1.0
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        with:
+          method: users.lookupByEmail
+          args: |
+            {
+              "email": "jamie.hill@beautypie.com",
+              "token": "${{ secrets.SLACK_TOKEN }}"
+            }
+
+      - name: Users email
+        if: always()
+        run: echo ${{ steps.users.outputs.user.profile.email }} is on call
+      
+
+      - name: Slack Message                     
+        if: always()
         uses: slackapi/slack-github-action@v1.18.0
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
