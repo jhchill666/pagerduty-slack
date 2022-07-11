@@ -88,6 +88,7 @@ jobs:
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
         if: always()
+        id: user-email
         with:
           url: https://slack.com/api/users.lookupByEmail
           method: 'GET'
@@ -96,7 +97,7 @@ jobs:
 
       - name: Users email
         if: always()
-        run: echo "${{ fromJson(steps.users.outputs.user).profile.email }}" is on call
+        run: echo ${{ steps.user-email.outputs.response }}
       
 
       - name: Slack Message                     
