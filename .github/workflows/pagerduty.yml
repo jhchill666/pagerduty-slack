@@ -11,6 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Developer Weekday Schedule
+        uses: fjogeleit/http-request-action@v1
+        if: always()
+        id: weekday-email
+        with:
+          url: https://api.pagerduty.com/oncalls?email=${{ steps.dev-weekday.outputs.person }}
+          method: 'GET'
+          customHeaders: '{"Content-Type": "application/vnd.pagerduty+json;version=2", "Authorization": "Token token=${{ secrets.PAGERDUTY_TOKEN }}"}'
+          contentType: application/json
+          bearerToken: ${{ secrets.SLACK_TOKEN }}
+
+
+      - name: Developer Weekday Schedule
         id: dev-weekday
         uses: mxie/pagerduty-oncall-action@main
         with:
