@@ -92,7 +92,7 @@ jobs:
         with:
           url: https://slack.com/api/users.lookupByEmail
           method: 'GET'
-          customHeaders: '{"Content-Type": "application/x-www-form-urlencoded"}'
+          customHeaders: '{"Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer ${{ secrets.SLACK_TOKEN }}"}'
           data: '{"email": "jamie.hill@beautypie.com", "token": "${{ secrets.SLACK_TOKEN }}"}'
 
       - name: Users email
