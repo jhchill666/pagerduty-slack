@@ -90,10 +90,10 @@ jobs:
         if: always()
         id: user-email
         with:
-          url: https://slack.com/api/users.lookupByEmail
+          url: https://slack.com/api/users.lookupByEmail?email=jamie.hill@beautypie.com
           method: 'GET'
-          customHeaders: '{"Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer ${{ secrets.SLACK_TOKEN }}"}'
-          data: email=jamie.hill@beautypie.com
+          contentType: application/x-www-form-urlencoded
+          bearerToken: ${{ secrets.SLACK_TOKEN }}
 
       - name: Users email
         if: always()
