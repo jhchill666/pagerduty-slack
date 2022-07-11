@@ -87,6 +87,7 @@ jobs:
 
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
+        if: always()
         with:
           url: https://slack.com/api/users.lookupByEmail
           method: 'GET'
