@@ -87,7 +87,7 @@ jobs:
 
       - name: Users email
         if: always()
-        run: echo ${{ steps.users.outputs.user.profile.email }} is on call
+        run: echo "${{ fromJson(steps.users.outputs.user).profile.email }}" is on call
       
 
       - name: Slack Message                     
