@@ -19,7 +19,7 @@ jobs:
 
       - name: Critical Issues Schedule
         if: always()
-        id: critical-issue
+        id: critical
         uses: mxie/pagerduty-oncall-action@main
         with:
           token: ${{ secrets.PAGERDUTY_TOKEN }}
@@ -33,90 +33,103 @@ jobs:
           token: ${{ secrets.PAGERDUTY_TOKEN }}
           schedule-id: P2SAWCS
           
-      - name: Devops Schedule
-        if: always()
-        id: devops
-        uses: mxie/pagerduty-oncall-action@main
-        with:
-          token: ${{ secrets.PAGERDUTY_TOKEN }}
-          schedule-id: P51TQWY
+      # - name: Devops Schedule
+      #   if: always()
+      #   id: devops
+      #   uses: mxie/pagerduty-oncall-action@main
+      #   with:
+      #     token: ${{ secrets.PAGERDUTY_TOKEN }}
+      #     schedule-id: P51TQWY
 
-      - name: Dev Weekday
-        if: always()
-        run: echo ${{ steps.dev-weekday.outputs.person }} is on call
+      # - name: Dev Weekday
+      #   if: always()
+      #   run: echo ${{ steps.dev-weekday.outputs.person }} is on call
 
-      - name: Critical Issues
-        if: always()
-        run: echo ${{ steps.critical-issue.outputs.person }} is on call
+      # - name: Critical Issues
+      #   if: always()
+      #   run: echo ${{ steps.critical.outputs.person }} is on call
 
-      - name: Escalation
-        if: always()
-        run: echo ${{ steps.escalation.outputs.person }} is on call
+      # - name: Escalation
+      #   if: always()
+      #   run: echo ${{ steps.escalation.outputs.person }} is on call
 
-      - name: Devops
-        if: always()
-        run: echo ${{ steps.devops.outputs.person }} is on call
+      # - name: Devops
+      #   if: always()
+      #   run: echo ${{ steps.devops.outputs.person }} is on call
 
-      - name: Slack Message                     
-        if: always()
-        uses: hbfernandes/slack-action@1.0
-        env:
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-        with:
-          method: conversations.setTopic
-          args: |
-            {
-              "channel": "oncall-rota",
-              "topic": "Hello there Jamie!",
-              "token": "${{ secrets.SLACK_TOKEN }}"
-            }
+      # - name: Slack Message                     
+      #   if: always()
+      #   uses: hbfernandes/slack-action@1.0
+      #   env:
+      #     SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+      #   with:
+      #     method: conversations.setTopic
+      #     args: |
+      #       {
+      #         "channel": "oncall-rota",
+      #         "topic": "Hello there Jamie!",
+      #         "token": "${{ secrets.SLACK_TOKEN }}"
+      #       }
 
-      - name: Slack Message                     
-        if: always()
-        id: users
-        uses: hbfernandes/slack-action@1.0
-        env:
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-        with:
-          method: users.lookupByEmail
-          args: |
-            {
-              "email": "jamie.hill@beautypie.com",
-              "token": "${{ secrets.SLACK_TOKEN }}"
-            }
-
-      - name: Deploy Stage
+      - name: Weekday Email
         uses: fjogeleit/http-request-action@v1
         if: always()
-        id: user-email
+        id: weekday-email
         with:
-          url: https://slack.com/api/users.lookupByEmail?email=jamie.hill@beautypie.com
+          url: https://slack.com/api/users.lookupByEmail?email=${{ steps.dev-weekday.outputs.person }}
+          method: 'GET'
+          contentType: application/x-www-form-urlencoded
+          bearerToken: ${{ secrets.SLACK_TOKEN }}
+
+      - name: Critical Email
+        uses: fjogeleit/http-request-action@v1
+        if: always()
+        id: critical-email
+        with:
+          url: https://slack.com/api/users.lookupByEmail?email=${{ steps.critical.outputs.person }}
+          method: 'GET'
+          contentType: application/x-www-form-urlencoded
+          bearerToken: ${{ secrets.SLACK_TOKEN }}
+
+      - name: Escalation Email
+        uses: fjogeleit/http-request-action@v1
+        if: always()
+        id: escalation-email
+        with:
+          url: https://slack.com/api/users.lookupByEmail?email=${{ steps.escalation.outputs.person }}
           method: 'GET'
           contentType: application/x-www-form-urlencoded
           bearerToken: ${{ secrets.SLACK_TOKEN }}
 
       - name: Users email
         if: always()
-        run: echo ${{ fromJson(steps.user-email.outputs.response).user.profile.email }}
-      
+        run: echo ${{ fromJson(steps.weekday-email.outputs.response).user.profile.email }}
 
-      - name: Slack Message                     
+      - name: Users email
         if: always()
-        uses: slackapi/slack-github-action@v1.18.0
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-        with:
-          payload: |
-            {
-              "text": "PagerDuty Rota Nofication: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                }
-              ]
-            }
+        run: echo ${{ fromJson(steps.critical-email.outputs.response).user.profile.email }}
+
+      - name: Users email
+        if: always()
+        run: echo ${{ fromJson(steps.escalation-email.outputs.response).user.profile.email }}
+
+      # - name: Slack Message                     
+      #   if: always()
+      #   uses: slackapi/slack-github-action@v1.18.0
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      #   with:
+      #     payload: |
+      #       {
+      #         "text": "PagerDuty Rota Nofication: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+      #         "blocks": [
+      #           {
+      #             "type": "section",
+      #             "text": {
+      #               "type": "mrkdwn",
+      #               "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+      #             }
+      #           }
+      #         ]
+      #       }
