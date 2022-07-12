@@ -18,10 +18,11 @@ jobs:
           method: 'GET'
           contentType: application/json
           bearerToken: ${{ secrets.SLACK_TOKEN }}
-          customHeaders: '{
-              "Authorization": "Token token=${{ secrets.PAGERDUTY_TOKEN }}"
-              "Content-Type": "application/vnd.pagerduty+json;version=2", 
-            }'
+          customHeaders: |
+            {
+              "Authorization": "Token token=${{ secrets.PAGERDUTY_TOKEN }}",
+              "Content-Type": "application/vnd.pagerduty+json;version=2"
+            }
 
       # - name: Slack Message                     
       #   if: always()
