@@ -68,9 +68,6 @@ jobs:
           payload: |
             [
               {
-                "type": "divider"
-              },
-              {
                 "type": "header",
                 "text": {
                   "type": "mrkdwn",
@@ -88,8 +85,5 @@ jobs:
                     }
                   }
                 ]
-              },
-              {
-                "type": "divider"
               }
             ]
