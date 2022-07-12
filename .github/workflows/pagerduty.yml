@@ -78,10 +78,10 @@ jobs:
                 },
                 {
                   "type": "section",
-                  "text": {
+                  "fields": [{
                     "type": "mrkdwn",
                     "text": "${{fromJson(steps.schedules.outputs.response).oncalls[0].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[0].user.summary}}`\n${{fromJson(steps.schedules.outputs.response).oncalls[1].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[1].user.summary}}`\n${{fromJson(steps.schedules.outputs.response).oncalls[2].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[2].user.summary}}`"
-                  }
+                  }]
                 }
               ]
             }
