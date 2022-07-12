@@ -6,7 +6,7 @@ on:
     - cron: 0 8 * * 1
 
 jobs:
-  Oncall:
+  Whos on-call?:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Rotas
@@ -58,7 +58,7 @@ jobs:
           start_time=${{fromJson(steps.schedules.outputs.response).oncalls[0].start}}
           echo "::set-output name=date::$(date -d "$start_time" +'%c')"
 
-      - name: Slack Message                     
+      - name: Send to Slack                     
         if: always()
         uses: slackapi/slack-github-action@v1.18.0
         env:
