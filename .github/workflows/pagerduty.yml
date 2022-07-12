@@ -66,22 +66,19 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         with:
           payload: |
-            {
-              "text": "PagerDuty Rota Nofication",
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": ":clock530: New rota starts at ${{ steps.date.outputs.date }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "${{fromJson(steps.schedules.outputs.response).oncalls[0].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[0].user.summary}}`\n${{fromJson(steps.schedules.outputs.response).oncalls[1].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[1].user.summary}}`\n${{fromJson(steps.schedules.outputs.response).oncalls[2].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[2].user.summary}}`"
-                  }
+            [
+              {
+                "type": "header",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":clock530: New rota starts at ${{ steps.date.outputs.date }}"
                 }
-              ]
-            }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "${{fromJson(steps.schedules.outputs.response).oncalls[0].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[0].user.summary}}`\n${{fromJson(steps.schedules.outputs.response).oncalls[1].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[1].user.summary}}`\n${{fromJson(steps.schedules.outputs.response).oncalls[2].schedule.summary}}: `${{fromJson(steps.schedules.outputs.response).oncalls[2].user.summary}}`"
+                }
+              }
+            ]
