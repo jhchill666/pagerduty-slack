@@ -6,7 +6,7 @@ on:
     - cron: 0 8 * * 1
 
 jobs:
-  Whos on-call?:
+  WhosOnCall:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Rotas
