@@ -27,34 +27,6 @@ jobs:
               "Content-Type": "application/vnd.pagerduty+json;version=2"
             }
 
-      # - name: Format Date
-      #   id: date
-      #   run: |
-      #     start_time=${{fromJson(steps.schedules.outputs.response).oncalls[0].start}}
-      #     echo "::set-output name=date::$(date -d "$start_time" +'%r')"
-      #     cp ./message.tmpl.json ./message.json
-
-      # - name: Send to Slack                     
-      #   if: always()
-      #   uses: slackapi/slack-github-action@v1.18.0
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-      #   with:
-      #     payload: |
-      #       {
-      #         "text": "PagerDuty Rota Nofication",
-      #         "blocks": [
-      #           {
-      #             "type": "header",
-      #             "text": {
-      #               "type": "plain_text",
-      #               "text": ":clock530: New rota starts at ${{ steps.date.outputs.date }}"
-      #             }
-      #           }
-      #         ]
-      #       }
-
   CollectSchedules:
     runs-on: ubuntu-latest
     needs: WhosOnCall
@@ -106,10 +78,6 @@ jobs:
           contentType: application/x-www-form-urlencoded
           bearerToken: ${{ secrets.SLACK_TOKEN }}
 
-      # - id: set-matrix
-      #   run: |
-      #     echo ${{ matrix.schedule.userId }}
-
       - name: Prepend User
         id: set-user
         run: |
@@ -123,37 +91,11 @@ jobs:
 
           echo "::set-output name=${{ matrix.schedule.scheduleId }}::$user"
 
-      # - name: Send to Slack                     
-      #   if: always()
-      #   uses: slackapi/slack-github-action@v1.18.0
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-      #   with:
-      #     payload: |
-      #       {
-      #         "text": "PagerDuty Rota Nofication",
-      #         "blocks": [
-      #           {
-      #             "type": "section",
-      #             "fields": [{
-      #               "type": "mrkdwn",
-      #               "text": "<@${{ fromJson(steps.slack-user.outputs.response).user.id }}> - <${{ matrix.schedule.scheduleUrl }}|${{ matrix.schedule.scheduleName }}>"
-      #             }]
-      #           }
-      #         ]
-      #       }
 
   SendToSlack:
     runs-on: ubuntu-latest
     needs: UserMatrix
     steps:
-      # - name: ECHO
-      #   run: |
-      #     echo ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).name }}
-      #     echo ${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).name }}
-      #     echo ${{ fromJson(needs.UserMatrix.outputs.P51TQWY).name }}
-
       - name: Send to Slack                     
         if: always()
         uses: slackapi/slack-github-action@v1.18.0
@@ -172,7 +114,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*<fakeLink.toUserProfiles.com|Iris / Zelda 1-1>*\nTuesday, January 21 4:00-4:30pm\nBuilding 2 - Havarti Cheese (3)\n2 guests"
+                    "text": "*On-call rota change*\nTuesday, January 21 4:00-4:30pm\nBuilding 2 - Havarti Cheese (3)\n3 Schedules"
                   },
                   "accessory": {
                     "type": "image",
@@ -201,28 +143,28 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Rota personnel:*"
+                    "text": "*Going on call:*"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).url }}|${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).name }}>"
+                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).url }}|${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).name }}>\n${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).start }} to ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).end }}"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).url }}|${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).name }}>"
+                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).url }}|${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).name }}>\n${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).start }} to ${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).end }}"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.P51TQWY).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P51TQWY).url }}|${{ fromJson(needs.UserMatrix.outputs.P51TQWY).name }}>"
+                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.P51TQWY).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P51TQWY).url }}|${{ fromJson(needs.UserMatrix.outputs.P51TQWY).name }}>\n${{ fromJson(needs.UserMatrix.outputs.P51TQWY).start }} to ${{ fromJson(needs.UserMatrix.outputs.P51TQWY).end }}"
                   }
                 },
                 {
