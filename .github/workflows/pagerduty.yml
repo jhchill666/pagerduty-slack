@@ -126,14 +126,14 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "*On-call rotation change*"
+                    "text": "On-call rotation change"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}, Week #${{ steps.set-week.outputs.week }}\n3 Schedules"
+                    "text": "${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}, Week #${{ steps.set-week.outputs.week }}"
                   }
                 },
                 {
