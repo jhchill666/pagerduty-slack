@@ -131,26 +131,20 @@ jobs:
                 },
                 {
                   "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "Week #${{ steps.set-week.outputs.week }}, 3 Schedules"
-                    }
-                  ]
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "section",
                   "text": {
                     "type": "mrkdwn",
                     "text": "*Going on call:*"
-                  }
+                  },
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Going on call:*"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}"
+                    }
+                  ]
                 },
                 {
                   "type": "section",
