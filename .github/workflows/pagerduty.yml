@@ -125,7 +125,7 @@ jobs:
                 {
                   "type": "header",
                   "text": {
-                    "type": "mrkdwn",
+                    "type": "plain_text",
                     "text": "*On-call rotation change*"
                   }
                 },
