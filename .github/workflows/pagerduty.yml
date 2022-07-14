@@ -134,11 +134,6 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": "${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}, Week #${{ steps.set-week.outputs.week }}\n3 Schedules"
-                  },
-                  "accessory": {
-                    "type": "image",
-                    "image_url": "https://api.slack.com/img/blocks/bkb_template_images/notifications.png",
-                    "alt_text": "calendar thumbnail"
                   }
                 },
                 {
