@@ -90,8 +90,8 @@ jobs:
       - name: Prepend User
         id: set-user
         run: |
-          start_time=$(date -d "${{ matrix.schedule.start }}" +'%a, %b %d @%-I%M %p')
-          end_time=$(date -d "${{ matrix.schedule.end }}" +'%a, %b %d @%-I%M %p')
+          start_time=$(TZ=:Europe/London date -d "${{ matrix.schedule.start }}" +'%a, %b %d @%-I%M %p')
+          end_time=$(TZ=:Europe/London date -d "${{ matrix.schedule.end }}" +'%a, %b %d @%-I%M %p')
 
           user=$(jq -c -n \
             --arg userId "${{ fromJson(steps.slack-user.outputs.response).user.id }}" \
