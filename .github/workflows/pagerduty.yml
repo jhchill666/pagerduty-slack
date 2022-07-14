@@ -126,7 +126,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":clock530: *On-call rotation change*\n${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}, Week #${{ steps.set-week.outputs.week }}\n3 Schedules"
+                    "text": "*On-call rotation change*\n${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}, Week #${{ steps.set-week.outputs.week }}\n3 Schedules"
                   },
                   "accessory": {
                     "type": "image",
@@ -148,21 +148,21 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).url }}|${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).name }}>\n${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).start }} to ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).end }}"
+                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).url }}|${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).name }}>\n:clock530: ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).start }} to ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).end }}"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).url }}|${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).name }}>\n${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).start }} to ${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).end }}"
+                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).url }}|${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).name }}>\n:clock530: ${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).start }} to ${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).end }}"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.P51TQWY).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P51TQWY).url }}|${{ fromJson(needs.UserMatrix.outputs.P51TQWY).name }}>\n${{ fromJson(needs.UserMatrix.outputs.P51TQWY).start }} to ${{ fromJson(needs.UserMatrix.outputs.P51TQWY).end }}"
+                    "text": "<@${{ fromJson(needs.UserMatrix.outputs.P51TQWY).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P51TQWY).url }}|${{ fromJson(needs.UserMatrix.outputs.P51TQWY).name }}>\n:clock530: ${{ fromJson(needs.UserMatrix.outputs.P51TQWY).start }} to ${{ fromJson(needs.UserMatrix.outputs.P51TQWY).end }}"
                   }
                 }
               ]
