@@ -150,7 +150,9 @@ jobs:
     steps:
       - name: ECHO
         run: |
-          echo ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).userId }}
+          echo ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).name }}
+          echo ${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).name }}
+          echo ${{ fromJson(needs.UserMatrix.outputs.P51TQWY).name }}
 
       # - name: Send to Slack                     
       #   if: always()
