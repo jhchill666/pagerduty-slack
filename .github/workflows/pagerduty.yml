@@ -146,21 +146,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "><@${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).url }}|${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).name }}>\n>${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).start }} to ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).end }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "><@${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).url }}|${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).name }}>\n>${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).start }} to ${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).end }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "><@${{ fromJson(needs.UserMatrix.outputs.P51TQWY).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P51TQWY).url }}|${{ fromJson(needs.UserMatrix.outputs.P51TQWY).name }}>\n>${{ fromJson(needs.UserMatrix.outputs.P51TQWY).start }} to ${{ fromJson(needs.UserMatrix.outputs.P51TQWY).end }}"
+                    "text": "><@${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).url }}|${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).name }}>\n>${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).start }} to ${{ fromJson(needs.UserMatrix.outputs.PYJ6MPP).end }}\n><@${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).url }}|${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).name }}>\n>${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).start }} to ${{ fromJson(needs.UserMatrix.outputs.P2SAWCS).end }}\n\n><@${{ fromJson(needs.UserMatrix.outputs.P51TQWY).userId }}> - <${{ fromJson(needs.UserMatrix.outputs.P51TQWY).url }}|${{ fromJson(needs.UserMatrix.outputs.P51TQWY).name }}>\n>${{ fromJson(needs.UserMatrix.outputs.P51TQWY).start }} to ${{ fromJson(needs.UserMatrix.outputs.P51TQWY).end }}"
                   }
                 }
               ]
