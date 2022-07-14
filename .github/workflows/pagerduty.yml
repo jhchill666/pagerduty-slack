@@ -123,10 +123,17 @@ jobs:
                   "type": "divider"
                 },
                 {
+                  "type": "header",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*On-call rotation change*"
+                  }
+                },
+                {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*On-call rotation change*\n${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}, Week #${{ steps.set-week.outputs.week }}\n3 Schedules"
+                    "text": "${{ steps.set-week.outputs.start }} - ${{ steps.set-week.outputs.end }}, Week #${{ steps.set-week.outputs.week }}\n3 Schedules"
                   },
                   "accessory": {
                     "type": "image",
