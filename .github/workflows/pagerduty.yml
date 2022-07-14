@@ -131,10 +131,6 @@ jobs:
                 },
                 {
                   "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Going on call:*"
-                  },
                   "fields": [
                     {
                       "type": "mrkdwn",
