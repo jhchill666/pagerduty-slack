@@ -78,15 +78,6 @@ jobs:
           contentType: application/x-www-form-urlencoded
           bearerToken: ${{ secrets.SLACK_TOKEN }}
 
-      # - name: Format Date
-      #   id: date
-      #   run: |
-      #     start_time=${{fromJson(steps.schedules.outputs.response).oncalls[0].start}}
-      #     echo "::set-output name=date::$(date -d "$start_time" +'%r')"
-      #     cp ./message.tmpl.json ./message.json
-
-
-
       - name: Prepend User
         id: set-user
         run: |
@@ -103,11 +94,20 @@ jobs:
 
           echo "::set-output name=${{ matrix.schedule.scheduleId }}::$user"
 
-
   SendToSlack:
     runs-on: ubuntu-latest
     needs: UserMatrix
     steps:
+      - id: set-week
+        run: |
+          week=$(TZ=:Europe/London date +'%V')
+          start=$(TZ=:Europe/London date +'%b %d')
+          end=$(TZ=:Europe/London date -d '+7 days' +'%b %d')
+          
+          echo "::set-output name=week::$week"
+          echo "::set-output name=week::$start"
+          echo "::set-output name=week::$end"
+
       - name: Send to Slack                     
         if: always()
         uses: slackapi/slack-github-action@v1.18.0
@@ -126,7 +126,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*On-call rotation change*\n3 rotas to change in next 24hours, see below\n3 Schedules"
+                    "text": "*On-call rotation change*\nWeek #${{ steps.outputs.set-week.week }}, ${{ steps.outputs.set-week.start }} - ${{ steps.outputs.set-week.end }}, see below\n3 Schedules"
                   },
                   "accessory": {
                     "type": "image",
