@@ -100,7 +100,7 @@ jobs:
     steps:
       - id: set-week
         run: |
-          run_url=${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}
+          run_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
 
           week=$(TZ=:Europe/London date +'%V')
           start=$(TZ=:Europe/London date +'%b %d')
