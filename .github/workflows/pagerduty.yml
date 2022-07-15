@@ -154,7 +154,7 @@ jobs:
                   "elements": [
                     {
                       "type": "image",
-                      "image_url": "https://cdn.cdnlogo.com/logos/g/55/github.svg",
+                      "image_url": "https://cdn-icons-png.flaticon.com/512/37/37819.png",
                       "alt_text": "images"
                     },
                     {
