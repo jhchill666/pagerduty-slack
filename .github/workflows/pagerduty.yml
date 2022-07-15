@@ -159,10 +159,10 @@ jobs:
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "Initited from Github"
+                      "text": "<$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|Initited from Github>"
                     }
                   ]
-                }
+                },
                 {
                   "type": "divider"
                 }
