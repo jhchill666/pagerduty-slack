@@ -150,6 +150,20 @@ jobs:
                   }
                 },
                 {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "image",
+                      "image_url": "https://cdn.cdnlogo.com/logos/g/55/github.svg",
+                      "alt_text": "images"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "Initited from Github"
+                    }
+                  ]
+                }
+                {
                   "type": "divider"
                 }
               ]
