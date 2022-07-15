@@ -100,6 +100,8 @@ jobs:
     steps:
       - id: set-week
         run: |
+          run_url=${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}
+
           week=$(TZ=:Europe/London date +'%V')
           start=$(TZ=:Europe/London date +'%b %d')
           end=$(TZ=:Europe/London date -d '+7 days' +'%b %d')
@@ -107,6 +109,7 @@ jobs:
           echo "::set-output name=week::$week"
           echo "::set-output name=start::$start"
           echo "::set-output name=end::$end"
+          echo "::set-output name=run_url::$run_url"
 
       - name: Send to Slack                     
         if: always()
@@ -159,7 +162,7 @@ jobs:
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "<${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}|Initited from Github>"
+                      "text": "<${{ steps.set-week.outputs.run_url }}|Initited from Github>"
                     }
                   ]
                 },
