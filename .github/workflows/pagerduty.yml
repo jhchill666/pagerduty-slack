@@ -100,9 +100,11 @@ jobs:
     steps:
       - id: set-dates
         run: |
+          week=$(TZ=:Europe/London date +'%V')
           start=$(TZ=:Europe/London date +'%b %d')
           end=$(TZ=:Europe/London date -d '+7 days' +'%b %d')
           
+          echo "::set-output name=week::$week"
           echo "::set-output name=start::$start"
           echo "::set-output name=end::$end"
 
@@ -136,7 +138,7 @@ jobs:
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "${{ steps.set-dates.outputs.start }} - ${{ steps.set-dates.outputs.end }}"
+                      "text": "Week #${{ steps.set-dates.outputs.week }}, ${{ steps.set-dates.outputs.start }} - ${{ steps.set-dates.outputs.end }}"
                     }
                   ]
                 },
