@@ -2,8 +2,8 @@ name: PagerDuty Rota Notifier
 on:
   push:
   workflow_dispatch:
-  schedule:
-    - cron: 45 17 * * 1
+  # schedule:
+  #   - cron: 45 17 * * 1
 
 jobs:
   WhosOnCall:
